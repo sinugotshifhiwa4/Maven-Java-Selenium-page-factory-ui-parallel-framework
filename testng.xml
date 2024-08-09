@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" parallel="methods" thread-count="4">
+    
+    <listeners>
+        <listener class-name="com.adactin.components.ReportListeners"/>
+    </listeners>
+    
+    <test verbose="2" preserve-order="true" name="C:/Java_Projects/Tshifhiwa-upskilling-ui-framework - Chrome">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="url" value="https://adactinhotelapp.com/"/>
+        <classes>
+            <class name="com.adactin.tests.AdactinHotelTests">
+                <methods>
+                    <include name="loginWithValidCredentials"/>
+                    <include name="loginWithInvalidCredentials"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

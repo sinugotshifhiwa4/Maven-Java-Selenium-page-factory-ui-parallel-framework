@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5Level] %d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n" />
+        </Console>
+        <Routing name="RoutingAppender">
+            <Routes pattern="${ctx:LogFilename}">
+                <Route>
+                    <RollingFile name="Rolling-${ctx:LogFilename}"
+                                 fileName="logs/${ctx:LogFilename}.log"
+                                 filePattern="logs/%d{yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz"
+                                 append="true">
+                        <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n" />
+                        <Policies>
+                            <SizeBasedTriggeringPolicy size="10 MB"/>
+                        </Policies>
+                        <DefaultRolloverStrategy max="7"/>
+                    </RollingFile>
+                </Route>
+            </Routes>
+        </Routing>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="RoutingAppender"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
